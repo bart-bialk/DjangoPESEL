@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Walidator PESEL</title>
+</head>
+<body>
+    <h1>Walidator numeru PESEL</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sprawdź</button>
+    </form>
+
+    {% if result %}
+        <hr>
+        {% if result.valid %}
+            <p><strong>Numer PESEL jest poprawny!</strong></p>
+            <p>Data urodzenia: {{ result.birth_date }}</p>
+            <p>Płeć: {{ result.gender }}</p>
+        {% else %}
+            <p><strong>Błąd:</strong> {{ result.error }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
